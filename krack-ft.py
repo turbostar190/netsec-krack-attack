@@ -14,6 +14,7 @@ from mn_wifi.net import Mininet_wifi
 from mn_wifi.cli import CLI
 from mn_wifi.link import wmediumd
 from mn_wifi.wmediumdConnector import interference
+import os
 
 
 def topology():
@@ -38,6 +39,9 @@ def topology():
     info("*** Configuring wifi nodes\n")
     net.configureWifiNodes()
 
+    info("*** Linking nodes\n")
+    net.addLink(ap1, ap2)
+
     info("*** Configuring AP settings\n")
     # Configuration of access point 1 and 2
     # Master is the mode acting as an access point
@@ -59,11 +63,14 @@ def topology():
     sta1.cmd("iw dev sta1-wlan0 interface add mon0 type monitor")
     sta1.cmd("ifconfig mon0 up")
 
-    sleep(10)
+    sleep(5)
     # We need AP scanning. Otherwise, roam won't work
     makeTerm(sta1, title='Scanning', cmd="bash -c 'echo \"AP Scanning\" && iw dev sta1-wlan0 scan; read;'")
     # Initialize the FT test monitor
-    makeTerm(sta1, title='KrackAttack', cmd="bash -c 'cd krackattack && python krack-ft-test.py wpa_supplicant -D nl80211 -i sta1-wlan0 -c ../sta1-wlan0_0.staconf;'")
+    sleep(15)
+    sta1.cmd("killall wpa_supplicant")
+    makeTerm(sta1, title='KrackAttack', cmd="bash -c 'cd krackattacks-scripts/krackattack && source venv/bin/activate && python krack-ft-test.py wpa_supplicant -D nl80211 -i sta1-wlan0 -c ../../sta1-wlan0_0.staconf;'")
+    makeTerm(sta1, title='wpa_cli')
 
     info("*** Running CLI\n")
     CLI(net)
