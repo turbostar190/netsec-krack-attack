@@ -23,8 +23,8 @@ def topology():
     net = Mininet_wifi(link=wmediumd, wmediumd_mode=interference)
 
     info("*** Creating nodes\n")
-    ap1 = net.addStation('ap1', mac='02:00:00:00:01:00', position='10,30,0')
-    sta1 = net.addStation('sta1', ip='192.168.100.100/24', position='50,0,0')
+    ap1 = net.addStation('ap1', mac='02:00:00:00:01:00', position='10,30,0', inNamespace=True)
+    sta1 = net.addStation('sta1', ip='192.168.100.100/24', position='50,0,0', inNamespace=True)
 
     info("*** Configuring Propagation Model\n")
     net.setPropagationModel(model="logDistance", exp=3.5)
@@ -46,6 +46,12 @@ def topology():
     sta1.cmd("ifconfig mon0 up")
 
     sleep(10)
+
+    # launch script listener script on the access point
+    makeTerm(ap1, title='AP', cmd="bash -c 'cd krackattacks-scripts/krackattack && source venv/bin/activate && python krack-test-client.py;'")
+    sleep(5)
+    # we connect the client to the AP
+    makeTerm(sta1, title='Connect', cmd="bash -c 'wpa_supplicant -i sta1-wlan0 -c network.conf'")
 
     info("*** Running CLI\n")
     CLI(net)
