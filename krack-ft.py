@@ -25,13 +25,10 @@ def topology():
     info("*** Creating nodes\n")
     sta1 = net.addStation('sta1', ip='10.0.0.1/8', position='50,0,0',
                           encrypt='wpa2')
-    # sta1.set_circle_color('r')
     ap1 = net.addStation('ap1', mac='02:00:00:00:01:00',
                          ip='10.0.0.101/8', position='10,30,0')
-    # ap1.set_circle_color('b')
     ap2 = net.addStation('ap2', mac='02:00:00:00:02:00',
                          ip='10.0.0.102/8', position='100,30,0')
-    # ap2.set_circle_color('g')
 
     info("*** Configuring Propagation Model\n")
     net.setPropagationModel(model="logDistance", sL=0.4, exp=3.5)
@@ -47,10 +44,10 @@ def topology():
     # Master is the mode acting as an access point
     ap1.setMasterMode(intf='ap1-wlan0', ssid='handover', channel='1',
                       ieee80211r=True, mobility_domain='a1b2',
-                      passwd='123456789a', encrypt='wpa2', datapath="user")
+                      passwd='123456789a', encrypt='wpa2', datapath="user", failMode="standalone")
     ap2.setMasterMode(intf='ap2-wlan0', ssid='handover', channel='6',
                       ieee80211r=True, mobility_domain='a1b2',
-                      passwd='123456789a', encrypt='wpa2', datapath="user")
+                      passwd='123456789a', encrypt='wpa2', datapath="user", failMode="standalone")
 
     info("*** Plotting Graph\n")
     net.plotGraph(min_x=-100, min_y=-100, max_x=200, max_y=200)
@@ -65,7 +62,7 @@ def topology():
 
     sleep(5)
     # We need AP scanning. Otherwise, roam won't work
-    makeTerm(sta1, title='Scanning', cmd="bash -c 'echo \"AP Scanning\" && iw dev sta1-wlan0 scan; read;'")
+    makeTerm(sta1, title='Scanning', cmd="bash -c 'echo \"AP Scanning\" && wpa_cli -i sta1-wlan0 scan; read;'")
     # Initialize the FT test monitor
     sleep(15)
     sta1.cmd("killall wpa_supplicant")

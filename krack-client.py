@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 
 """This code tests if a client is affected by CVE-2017-13077 and 
 CVE-2017-13078 (KRACK attack) and determine whether an 
@@ -27,7 +27,7 @@ def topology():
     sta1 = net.addStation('sta1', ip='192.168.100.100/24', position='50,0,0', inNamespace=True)
 
     info("*** Configuring Propagation Model\n")
-    net.setPropagationModel(model="logDistance", exp=3.5)
+    net.setPropagationModel(model="logDistance", sL=0.4, exp=3.5)
 
     info("*** Configuring wifi nodes\n")
     net.configureWifiNodes()
@@ -50,8 +50,9 @@ def topology():
     # launch script listener script on the access point
     makeTerm(ap1, title='AP', cmd="bash -c 'cd krackattacks-scripts/krackattack && source venv/bin/activate && python krack-test-client.py;'")
     sleep(5)
+    sta1.cmd("killall wpa_supplicant")
     # we connect the client to the AP
-    makeTerm(sta1, title='Connect', cmd="bash -c 'wpa_supplicant -i sta1-wlan0 -c network.conf'")
+    makeTerm(sta1, title='Connection', cmd="bash -c 'wpa_supplicant -i sta1-wlan0 -c network.conf'")
 
     info("*** Running CLI\n")
     CLI(net)
