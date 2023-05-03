@@ -30,13 +30,11 @@ def topology():
 
     info("*** Configuring AP settings\n")
     # Configuration of access point 1 and 2
-    ap1 = net.addAccessPoint('ap1',  mac='02:00:00:00:01:00', ip='10.0.0.101/8',
-                             ssid="handover", mode="g", 
+    ap1 = net.addAccessPoint('ap1',  mac='02:00:00:00:01:00', ssid="handover", mode="g", 
                              channel="1", ieee80211r='yes', mobility_domain='a1b2', 
                              passwd='123456789a', encrypt='wpa2', position='10,30,0', 
                              inNamespace=True, datapath="user", failMode="standalone")
-    ap2 = net.addAccessPoint('ap2', mac='02:00:00:00:02:00', ip='10.0.0.102/8', 
-                             ssid="handover", mode="g", 
+    ap2 = net.addAccessPoint('ap2', mac='02:00:00:00:02:00', ssid="handover", mode="g", 
                              channel="6", ieee80211r='yes', mobility_domain='a1b2', 
                              passwd='123456789a', encrypt='wpa2', position='100,30,0', 
                              inNamespace=True, datapath="user", failMode="standalone")
@@ -55,6 +53,9 @@ def topology():
 
     info("*** Starting network\n")
     net.build()
+    ap1.cmd('ifconfig ap1-wlan1 10.0.0.101/8')
+    ap2.cmd('ifconfig ap2-wlan1 10.0.0.102/8')
+    os.system('ip link set hwsim0 up')
 
 
     # Monitor mode, or RFMON (Radio Frequency MONitor) mode, allows a computer with a wireless network 
