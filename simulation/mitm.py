@@ -42,9 +42,7 @@ def contin():
     flag = input(color.COLOR_GREEN + "Press <enter> to continue\n" + color.COLOR_RESET)
     
 if __name__ == "__main__":
-    print("""
-█▀▄▀█ █ ▀█▀ █▀▄▀█
-█░▀░█ █ ░█░ █░▀░█""")
+    print("""MITM""")
     
     print()
     

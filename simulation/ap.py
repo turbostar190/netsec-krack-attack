@@ -37,9 +37,7 @@ def wait():
             break
 
 if __name__ == "__main__":
-    print("""
-▄▀█ █░█ ▀█▀ █░█ █▀▀ █▄░█ ▀█▀ █ █▀▀ ▄▀█ ▀█▀ █▀█ █▀█
-█▀█ █▄█ ░█░ █▀█ ██▄ █░▀█ ░█░ █ █▄▄ █▀█ ░█░ █▄█ █▀▄""")
+    print("""AUTHENTICATOR""")
     
     print()
     input(color.COLOR_GREEN + "Press <enter> to start the simulation...\n"+ color.COLOR_RESET)

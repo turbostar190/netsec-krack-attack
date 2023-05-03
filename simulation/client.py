@@ -37,9 +37,7 @@ def wait():
 
 if __name__ == "__main__":
 
-    print("""
-█▀ █░█ █▀█ █▀█ █░░ █ █▀▀ ▄▀█ █▄░█ ▀█▀
-▄█ █▄█ █▀▀ █▀▀ █▄▄ █ █▄▄ █▀█ █░▀█ ░█░""")
+    print("""SUPPLICANT""")
           
     print()
     print("Waiting ANonce from AP...\n")
