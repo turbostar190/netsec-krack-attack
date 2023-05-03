@@ -63,7 +63,7 @@ def topology():
     # remove any previosly opened interfaces
     sta1.cmd("killall wpa_supplicant")
     # connect the client to the AP
-    makeTerm(sta1, title='Connection', cmd="bash -c 'wpa_supplicant -i sta1-wlan0 -c network.conf'")
+    makeTerm(sta1, title='Connection', cmd="bash -c 'wpa_supplicant -i sta1-wlan0 -c client-network.conf'")
 
     info("*** Running CLI\n")
     CLI(net)
