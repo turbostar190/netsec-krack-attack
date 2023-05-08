@@ -75,6 +75,9 @@ def topology():
     kernel = subprocess.check_output(("uname", "-r"))
     info("Using kernel v%s\n" % kernel)
 
+    # start wireshark
+    sta1.cmd("wireshark &")
+
     sleep(5)
 
     # We need AP scanning. Otherwise, roam won't work

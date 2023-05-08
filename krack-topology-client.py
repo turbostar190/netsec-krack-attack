@@ -56,6 +56,9 @@ def topology():
     kernel = subprocess.check_output(("uname", "-r"))
     info("Using kernel v%s\n" % kernel)
 
+    # start wireshark
+    sta1.cmd("wireshark &")
+
     sleep(10)
 
     # launch script listener script on the access point
