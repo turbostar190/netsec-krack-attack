@@ -70,7 +70,10 @@ def topology():
     except: 
         output = subprocess.check_output(("grep", "v[0-9].[0-9]*"), stdin=hostapd.stdout)
     hostapd.wait()
-    info("Using %s\n" % output)
+    info("Using %s" % output)
+    # print kernel version
+    kernel = subprocess.check_output(("uname", "-r"))
+    info("Using kernel v%s\n" % kernel)
 
     sleep(5)
 

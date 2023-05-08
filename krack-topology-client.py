@@ -52,6 +52,9 @@ def topology():
     output = subprocess.check_output(("grep", "v[0-9].[0-9]*"), stdin=wpa_s.stdout)
     wpa_s.wait()
     info("Using %s\n" % output)
+    # print kernel version
+    kernel = subprocess.check_output(("uname", "-r"))
+    info("Using kernel v%s\n" % kernel)
 
     sleep(10)
 
