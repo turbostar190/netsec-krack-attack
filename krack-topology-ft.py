@@ -81,7 +81,7 @@ def topology():
     sleep(5)
 
     # We need AP scanning. Otherwise, roam won't work
-    makeTerm(sta1, title='Scanning')
+    makeTerm(sta1, title='Scanning', cmd="bash -c 'echo \"AP Scanning\" && wpa_cli -i sta1-wlan0 scan; read;'")
 
     sleep(15)
 
