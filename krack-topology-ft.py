@@ -81,14 +81,14 @@ def topology():
     sleep(5)
 
     # We need AP scanning. Otherwise, roam won't work
-    makeTerm(sta1, title='Scanning', cmd="bash -c 'echo \"AP Scanning\" && wpa_cli -i sta1-wlan0 scan; read;'")
+    makeTerm(sta1, title='Scanning')
 
     sleep(15)
 
     # remove any previosly opened interfaces
     sta1.cmd("killall wpa_supplicant")
     # Initialize the FT test monitor
-    makeTerm(sta1, title='KrackAttack', cmd="bash -c 'cd krackattacks-scripts/krackattack && source venv/bin/activate && python krack-ft-test.py wpa_supplicant -D nl80211 -i sta1-wlan0 -c ../../sta1-wlan0_0.staconf;'")
+    makeTerm(sta1, title='KrackAttack')
     makeTerm(sta1, title='wpa_cli')
 
     info("*** Running CLI\n")

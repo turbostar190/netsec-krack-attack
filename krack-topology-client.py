@@ -62,14 +62,14 @@ def topology():
     sleep(10)
 
     # launch script listener script on the access point
-    makeTerm(ap1, title='AP', cmd="bash -c 'cd krackattacks-scripts/krackattack && source venv/bin/activate && python krack-test-client.py;'")
+    makeTerm(ap1, title='AP')
 
     sleep(5)
     
     # remove any previosly opened interfaces
     sta1.cmd("killall wpa_supplicant")
     # connect the client to the AP
-    makeTerm(sta1, title='Connection', cmd="bash -c 'wpa_supplicant -i sta1-wlan0 -c client-network.conf'")
+    makeTerm(sta1, title='Connection')
 
     info("*** Running CLI\n")
     CLI(net)
