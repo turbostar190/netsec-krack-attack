@@ -1,0 +1,17 @@
+# android 6
+((((((!(wlan.fc.type_subtype == 0x0008)) && !(wlan.fc.type_subtype == 0x0004)) && !(wlan.fc.type_subtype == 0x0005)) && !(wlan.fc == 0xd400)) && !(wlan.fc.type_subtype == 0x002c)) && !(wlan.fc.type_subtype == 0x0024)) && (wlan.sa == d0:87:e2:89:ef:4f)
+
+# android 12
+((((((((!(wlan.fc == 0x8000)) && !(wlan.fc.type_subtype == 0x0004)) && !(wlan.fc.type_subtype == 0x0005)) && !(wlan.fc.type_subtype == 0x001d)) && !(wlan.fc.type_subtype == 0x0024)) && !(wlan.fc == 0xb400)) && !(wlan.fc == 0xc400)) && (wlan.sa == 36:90:0e:45:a4:eb)) && (wlan.da == a0:f3:c1:08:5c:6a)
+
+# wpa_supplicant 2.3
+((!(wlan.fc.type_subtype == 0x0008)) && !(wlan.fc.type_subtype == 0x0004)) && !(wlan.fc.type_subtype == 0x0005)
+
+# wpa_supplicant 2.5
+((!(wlan.fc.type_subtype == 0x0008)) && !(wlan.fc.type_subtype == 0x0004)) && !(wlan.fc.type_subtype == 0x0005)
+
+# wpa_supplicant 2.7
+((((!(wlan.fc.type_subtype == 0x0008)) && !(wlan.fc.type_subtype == 0x0004)) && !(wlan.fc.type_subtype == 0x0005)) && (wlan.sa == 02:00:00:00:03:00)) && !(wlan.fc.type_subtype == 0x0020)
+
+# ft reassociation
+!(wlan.fc.type_subtype == 0x0008)
